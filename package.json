@@ -1,6 +1,6 @@
 {
   "name": "react-fluid-gallery",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Fluid media gallery for React powered by WebGL.",
   "author": "transitive-bullshit",
   "license": "MIT",

@@ -46,7 +46,7 @@ export default class App extends Component {
 
 ## Credits
 
-The original versionon of this awesome gallery technique was published on [Tao Tajima](http://taotajima.jp/).
+The original versionon of this awesome gallery technique was published on the personal website of [Tao Tajima](http://taotajima.jp/).
 
 ## License
 

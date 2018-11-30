@@ -4,6 +4,8 @@
 
 [![NPM](https://img.shields.io/npm/v/react-fluid-gallery.svg)](https://www.npmjs.com/package/react-fluid-gallery) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+Inspired by [Tao Tajima](http://taotajima.jp/).
+
 ## Install
 
 ```bash

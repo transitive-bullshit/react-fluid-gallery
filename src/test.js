@@ -1,7 +1,7 @@
-import ExampleComponent from './'
+import ReactFluidGallery from './'
 
-describe('ExampleComponent', () => {
+describe('ReactFluidGallery', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
+    expect(ReactFluidGallery).toBeTruthy()
   })
 })

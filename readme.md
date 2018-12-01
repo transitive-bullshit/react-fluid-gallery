@@ -14,6 +14,8 @@ npm install --save react-fluid-gallery
 
 ## Usage
 
+Check out the [demo](https://transitive-bullshit.github.io/react-fluid-gallery/).
+
 ```jsx
 import React, { Component } from 'react'
 
@@ -21,14 +23,14 @@ import FluidGallery from 'react-fluid-gallery'
 
 import image1 from './1.jpg'
 import image2 from './2.jpg'
-import image3 from './3.jpg'
+import video3 from './3.mp4'
 
 export default class App extends Component {
   render () {
     return (
       <FluidGallery
         style={{ width: '100vw', height: '100vh' }}
-        slides={[ image1, image2, image3 ]}
+        slides={[ image1, image2, video3 ]}
       />
     )
   }

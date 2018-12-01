@@ -1,7 +1,7 @@
-// TODO: support video textures
 // TODO: allow overriding constants
 // TODO: support cleanup?
-// TODO: currentSlideIndex can be negative
+// TODO: better video texture detection than mp4 regex
+// TODO: backgroundSize options aside from 'stretch' for 'cover' and 'contain'
 
 import * as THREE from 'three'
 
@@ -48,12 +48,10 @@ export default class FluidGallery {
           value: new THREE.Vector2(1, 1)
         },
         texture1: {
-          // TODO: use this.currentslideindex
-          value: this._textures[0]
+          value: this._textures[this.currentSlideIndex]
         },
         texture2: {
-          // TODO: use this.nextSlideIndex
-          value: this._textures[1]
+          value: this._textures[this.nextSlideIndex]
         }
       }
     })
@@ -103,7 +101,7 @@ export default class FluidGallery {
       texture.maxFilter = THREE.LinearFilter
       return texture
     } else {
-      return this._textureLoader.load(src, () => 0, () => 0, (err) => console.error(src, err))
+      return this._textureLoader.load(src)
     }
   }
 

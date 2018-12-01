@@ -27,7 +27,7 @@ export default class App extends Component {
   render () {
     return (
       <FluidGallery
-        style={{ width: '100vw height: '100vh }}
+        style={{ width: '100vw', height: '100vh' }}
         slides={[ image1, image2, image3 ]}
       />
     )

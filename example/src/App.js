@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import FluidGallery from 'react-fluid-gallery'
 
+import video1 from './assets/0.mp4'
 import image1 from './assets/1.jpg'
 import image2 from './assets/2.jpg'
 import image3 from './assets/3.jpg'
@@ -10,6 +11,7 @@ import image5 from './assets/5.jpg'
 import image6 from './assets/6.jpg'
 
 const images = [
+  video1,
   image1,
   image2,
   image3,

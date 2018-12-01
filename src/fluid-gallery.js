@@ -22,6 +22,7 @@ export default class FluidGallery {
     } = canvas
 
     this._canvas = canvas
+    this._textureLoader = new THREE.TextureLoader()
     this._textures = slides.map(this._initTexture)
 
     this._time = 0
@@ -84,13 +85,31 @@ export default class FluidGallery {
     this._camera.updateProjectionMatrix()
   }
 
-  _initTexture(src) {
-    return THREE.ImageUtils.loadTexture(src)
+  _initTexture = (src) => {
+    if (/\.mp4$/.test(src)) {
+      const video = document.createElement('video')
+      video.muted = true
+      video.loop = true
+      video.autoplay = true
+      video.src = src
+      video.load()
+      video.play()
+
+      // TODO: temp
+      this._video = video
+
+      const texture = new THREE.VideoTexture(video)
+      texture.minFilter = THREE.LinearFilter
+      texture.maxFilter = THREE.LinearFilter
+      return texture
+    } else {
+      return this._textureLoader.load(src, () => 0, () => 0, (err) => console.error(src, err))
+    }
   }
 
   get currentSlideIndex() {
     const n = this._textures.length
-    return (Math.floor(this._position) - 1 + n) % n
+    return (Math.floor(this._position) + n) % n
   }
 
   get nextSlideIndex() {
@@ -110,6 +129,7 @@ export default class FluidGallery {
     this._position += this._speed
     this._speed *= 0.7
 
+    const n = this._textures.length
     const posI = Math.round(this._position)
     const diff = posI - this._position
 
@@ -117,6 +137,10 @@ export default class FluidGallery {
 
     if (Math.abs(posI - this._position) < 0.001) {
       this._position = posI
+    }
+
+    if (this._position < 0) {
+      this._position += n
     }
 
     this._material.uniforms.progress.value = this._position

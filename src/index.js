@@ -84,6 +84,7 @@ class ReactFluidGallery extends Component {
   }
 
   _onWheel = (event) => {
+    event.preventDefault()
     this._gallery.onScroll(event)
   }
 

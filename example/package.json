@@ -9,6 +9,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-fluid-gallery": "link:..",
+    "react-github-corner": "^2.3.0",
     "react-scripts": "^1.1.4"
   },
   "scripts": {

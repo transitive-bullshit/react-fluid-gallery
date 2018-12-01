@@ -1,7 +1,6 @@
 // TODO: allow overriding constants
 // TODO: support cleanup?
 // TODO: better video texture detection than mp4 regex
-// TODO: backgroundSize options aside from 'stretch' for 'cover' and 'contain'
 
 import * as THREE from 'three'
 
@@ -30,7 +29,6 @@ export default class FluidGallery {
     this._position = current
 
     this._renderer = new THREE.WebGLRenderer({ canvas })
-    // this._renderer.setPixelRatio(window.devicePixelRatio)
 
     this._camera = new THREE.PerspectiveCamera(70, width / height, 0.001, 100)
     this._camera.position.set(0, 0, 1)
@@ -118,7 +116,7 @@ export default class FluidGallery {
       texHeight = texture.image.naturalHeight || texture.image.videoHeight
     }
 
-    console.log('_updateTextureOnResize', texture, { texWidth, texHeight })
+    // console.log('_updateTextureOnResize', texture, { texWidth, texHeight })
 
     if (texWidth > 0 && texHeight > 0) {
       const {
@@ -150,7 +148,6 @@ export default class FluidGallery {
   }
 
   update() {
-    // update simulation
     this._time += 0.05
     this._material.uniforms.time.value = this._time
 

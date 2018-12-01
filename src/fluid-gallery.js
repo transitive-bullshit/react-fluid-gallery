@@ -81,6 +81,8 @@ export default class FluidGallery {
     this._plane.scale.x = width / height
 
     this._camera.updateProjectionMatrix()
+
+    this._textures.forEach(this._updateTextureOnResize)
   }
 
   _initTexture = (src) => {
@@ -89,19 +91,47 @@ export default class FluidGallery {
       video.muted = true
       video.loop = true
       video.autoplay = true
-      video.src = src
-      video.load()
-      video.play()
-
-      // TODO: temp
-      this._video = video
 
       const texture = new THREE.VideoTexture(video)
       texture.minFilter = THREE.LinearFilter
       texture.maxFilter = THREE.LinearFilter
+      video.addEventListener('load', () => this._updateTextureOnResize(texture))
+      video.addEventListener('loadedmetadata', () => this._updateTextureOnResize(texture))
+
+      video.src = src
+      video.load()
+      video.play()
+
       return texture
     } else {
-      return this._textureLoader.load(src)
+      const texture = this._textureLoader.load(src, this._updateTextureOnResize)
+      return texture
+    }
+  }
+
+  _updateTextureOnResize = (texture) => {
+    let texWidth
+    let texHeight
+
+    if (texture.image) {
+      texWidth = texture.image.naturalWidth || texture.image.videoWidth
+      texHeight = texture.image.naturalHeight || texture.image.videoHeight
+    }
+
+    console.log('_updateTextureOnResize', texture, { texWidth, texHeight })
+
+    if (texWidth > 0 && texHeight > 0) {
+      const {
+        width,
+        height
+      } = this._canvas
+
+      texture.wrapS = THREE.ClampToEdgeWrapping
+      texture.wrapT = THREE.RepeatWrapping
+      const repeatX = width * texHeight / (height * texWidth)
+      const repeatY = 1
+      texture.repeat.set(repeatX, repeatY)
+      texture.offset.x = (repeatX - 1) / 2 * -1
     }
   }
 

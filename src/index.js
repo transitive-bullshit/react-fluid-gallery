@@ -4,17 +4,22 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import raf from 'raf'
+import sizeMe from 'react-sizeme'
 
 import FluidGallery from './fluid-gallery'
 
 const noop = () => undefined
 
-export default class ReactFluidGallery extends Component {
+class ReactFluidGallery extends Component {
   static propTypes = {
     slides: PropTypes.arrayOf(PropTypes.string).isRequired,
     startAt: PropTypes.number,
     onChange: PropTypes.func,
-    style: PropTypes.object
+    style: PropTypes.object,
+    size: PropTypes.shape({
+      width: PropTypes.number,
+      height: PropTypes.number
+    })
   }
 
   static defaultProps = {
@@ -26,6 +31,10 @@ export default class ReactFluidGallery extends Component {
     ? this.props.startAt
     : (Math.random() * this.props.slides.length | 0)
   )
+
+  componentWillReceiveProps(props) {
+    this._onResize()
+  }
 
   componentDidMount() {
     this._reset(this.props)
@@ -78,6 +87,15 @@ export default class ReactFluidGallery extends Component {
     this._gallery.onScroll(event)
   }
 
+  _onResize = () => {
+    this._canvas.width = this._canvas.clientWidth
+    this._canvas.height = this._canvas.clientHeight
+
+    if (this._gallery) {
+      this._gallery.resize()
+    }
+  }
+
   _tick = () => {
     const {
       onChange
@@ -99,8 +117,7 @@ export default class ReactFluidGallery extends Component {
       slides
     } = props
 
-    this._canvas.width = this._canvas.clientWidth
-    this._canvas.height = this._canvas.clientHeight
+    this._onResize()
 
     this._gallery = new FluidGallery({
       canvas: this._canvas,
@@ -109,3 +126,5 @@ export default class ReactFluidGallery extends Component {
     })
   }
 }
+
+export default sizeMe({ monitorWidth: true, monitorHeight: true })(ReactFluidGallery)

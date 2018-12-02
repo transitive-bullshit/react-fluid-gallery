@@ -47,7 +47,7 @@ export default class App extends Component {
 | `slides`    | `Array<string>`  | **required** | Array of image / video URLs to use for the gallery slides. |
 | `startAt`   | number           | random   | Default slide to show. |
 | `onChange`  | function(index: number) | undefined   | Optional callback when the active slide is changed. |
-| `...`       | ...              | undefined | Any other props are applied to the root canvas element. |
+| `...`       | ...              | undefined | Any other props are applied to the root element. |
 
 ## Credits
 

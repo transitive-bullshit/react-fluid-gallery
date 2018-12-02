@@ -106,6 +106,8 @@ class ReactFluidGallery extends Component {
   }
 
   _onResize = () => {
+    console.log('resize', this._canvas.clientWidth, this._canvas.clientHeight)
+
     this._canvas.width = this._canvas.clientWidth
     this._canvas.height = this._canvas.clientHeight
 

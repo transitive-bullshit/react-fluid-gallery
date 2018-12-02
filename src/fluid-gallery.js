@@ -117,6 +117,9 @@ export default class FluidGallery {
   }
 
   _updateTextureOnResize = (texture) => {
+    // TODO: changing texture wrapS/wrapT and UV matrix only works with textures
+    // that are sizeed power of two
+
     /*
     let texWidth
     let texHeight
@@ -135,11 +138,21 @@ export default class FluidGallery {
       } = this._canvas
 
       texture.wrapS = THREE.ClampToEdgeWrapping
-      texture.wrapT = THREE.RepeatWrapping
-      const repeatX = width * texHeight / (height * texWidth)
-      const repeatY = 1
-      texture.repeat.set(repeatX, repeatY)
-      texture.offset.x = (repeatX - 1) / 2 * -1
+      texture.wrapT = THREE.ClampToEdgeWrapping
+
+      // const t = rectCover(this._canvas, { width: texWidth, height: texHeight })
+      // console.log(t)
+
+      // texture.offset.set(t[0] / width, t[1] / height)
+      // texture.repeat.set(4, 4)
+
+      // const repeatX = width * texHeight / (height * texWidth)
+      // const repeatY = 1
+      // texture.repeat.set(repeatX, repeatY)
+      // texture.offset.x = (repeatX - 1) / 2 * -1
+
+      texture.needsUpdate = true
+      console.log(texture)
     }
     */
   }

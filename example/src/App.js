@@ -43,6 +43,7 @@ export default class App extends Component {
             left: 0,
             right: 0,
             bottom: 0,
+            padding: '1em',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',

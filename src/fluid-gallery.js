@@ -20,6 +20,11 @@ export default class FluidGallery {
       height
     } = canvas
 
+    // TODO: why is this necessary on safari with three.js?
+    if (window.ImageBitmap === undefined) {
+      window.ImageBitmap = function () { }
+    }
+
     this._canvas = canvas
     this._textureLoader = new THREE.TextureLoader()
     this._textures = slides.map(this._initTexture)
@@ -57,6 +62,7 @@ export default class FluidGallery {
     this._plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1, 1, 1), this._material)
 
     this._scene = new THREE.Scene()
+    this._scene.background = new THREE.Color(0x111111)
     this._scene.add(this._plane)
 
     this.resize()
@@ -98,7 +104,7 @@ export default class FluidGallery {
 
       video.src = src
       video.load()
-      video.play()
+      // video.play()
 
       return texture
     } else {

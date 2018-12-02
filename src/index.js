@@ -1,10 +1,11 @@
-// TODO: handle resizing properly
+// TODO: better support for tracking touch position during swiping
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import raf from 'raf'
 import sizeMe from 'react-sizeme'
+import Swipeable from 'react-swipeable'
 
 import FluidGallery from './fluid-gallery'
 
@@ -58,7 +59,7 @@ class ReactFluidGallery extends Component {
     } = this.props
 
     return (
-      <div
+      <Swipeable
         style={{
           width: '100%',
           height: '100%',
@@ -66,6 +67,9 @@ class ReactFluidGallery extends Component {
           ...style
         }}
         {...rest}
+        stopPropagation={true}
+        preventDefaultTouchmoveEvent={true}
+        onSwiped={this._onSwiped}
       >
         <canvas
           ref={this._canvasRef}
@@ -75,7 +79,7 @@ class ReactFluidGallery extends Component {
             height: '100%'
           }}
         />
-      </div>
+      </Swipeable>
     )
   }
 
@@ -86,6 +90,17 @@ class ReactFluidGallery extends Component {
   _onWheel = (event) => {
     event.preventDefault()
     this._gallery.onScroll(event)
+  }
+
+  _onSwiped = (event, deltaX, deltaY, isFlick) => {
+    if (isFlick) {
+      deltaY *= 5
+    }
+
+    this._gallery.onScroll({
+      ...event,
+      deltaY
+    })
   }
 
   _onResize = () => {

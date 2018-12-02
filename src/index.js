@@ -72,6 +72,7 @@ class ReactFluidGallery extends Component {
         stopPropagation={true}
         preventDefaultTouchmoveEvent={true}
         onSwiped={this._onSwiped}
+        innerRef={this._containerRef}
       >
         <canvas
           ref={this._canvasRef}
@@ -83,6 +84,10 @@ class ReactFluidGallery extends Component {
         />
       </Swipeable>
     )
+  }
+
+  _containerRef = (ref) => {
+    this._container = ref
   }
 
   _canvasRef = (ref) => {
@@ -106,10 +111,8 @@ class ReactFluidGallery extends Component {
   }
 
   _onResize = () => {
-    console.log('resize', this._canvas.clientWidth, this._canvas.clientHeight)
-
-    this._canvas.width = this._canvas.clientWidth
-    this._canvas.height = this._canvas.clientHeight
+    this._canvas.width = this._container.clientWidth
+    this._canvas.height = this._container.clientHeight
 
     if (this._gallery) {
       this._gallery.resize()

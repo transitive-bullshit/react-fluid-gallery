@@ -9,7 +9,6 @@ uniform vec2 accel;
 
 varying vec2 vUv;
 varying vec2 vUv1;
-varying vec4 vPosition;
 
 vec2 mirrored(vec2 v) {
   vec2 m = mod(v, 2.0);

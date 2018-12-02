@@ -25,14 +25,14 @@ import FluidGallery from 'react-fluid-gallery'
 
 import image1 from './1.jpg'
 import image2 from './2.jpg'
-import video3 from './3.mp4'
+import video from './video.mp4'
 
 export default class App extends Component {
   render () {
     return (
       <FluidGallery
         style={{ width: '100vw', height: '100vh' }}
-        slides={[ image1, image2, video3 ]}
+        slides={[ image1, image2, video ]}
       />
     )
   }
@@ -42,12 +42,12 @@ export default class App extends Component {
 
 ## Props
 
-| Property      | Type               | Default                               | Description                                                                                                                                  |
-|:--------------|:-------------------|:--------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------|
-| `slides`    | `Array<string>`           | **required**                                  | Array of image / video URLs to use for the gallery slides. |
-| `startAt`   | number          | random                                 | Default slide to show. |
+| Property    | Type             | Default  | Description |
+|:------------|:-----------------|:---------|:------------|
+| `slides`    | `Array<string>`  | **required** | Array of image / video URLs to use for the gallery slides. |
+| `startAt`   | number           | random   | Default slide to show. |
 | `onChange`  | function(index: number) | undefined   | Optional callback when the active slide is changed. |
-| `...`       | ...              | undefined                            | Any other props are applied to the root canvas element. |
+| `...`       | ...              | undefined | Any other props are applied to the root canvas element. |
 
 ## Credits
 

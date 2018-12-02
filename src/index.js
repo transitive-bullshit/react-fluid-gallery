@@ -38,11 +38,13 @@ class ReactFluidGallery extends Component {
   }
 
   componentDidMount() {
+    window.addEventListener('resize', this._onResize)
     this._reset(this.props)
     this._tick()
   }
 
   componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize)
     if (this._tickRaf) {
       raf.cancel(this._tickRaf)
       this._tickRaf = null

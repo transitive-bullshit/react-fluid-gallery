@@ -1,8 +1,8 @@
 // TODO: allow overriding constants
 // TODO: support cleanup?
-// TODO: better video texture detection than mp4 regex
 
 import * as THREE from 'three'
+import isVideo from 'is-video'
 
 import fragmentShader from './frag'
 import vertexShader from './vert'
@@ -90,7 +90,7 @@ export default class FluidGallery {
   }
 
   _initTexture = (src) => {
-    if (/\.mp4$/.test(src)) {
+    if (isVideo(src)) {
       const video = document.createElement('video')
       video.muted = true
       video.loop = true
@@ -106,7 +106,7 @@ export default class FluidGallery {
       video.load()
       const play = video.play()
       if (play) {
-        play.catch((err) => undefined)
+        play.catch(() => undefined)
       }
 
       return texture
@@ -117,6 +117,7 @@ export default class FluidGallery {
   }
 
   _updateTextureOnResize = (texture) => {
+    /*
     let texWidth
     let texHeight
 
@@ -140,6 +141,7 @@ export default class FluidGallery {
       texture.repeat.set(repeatX, repeatY)
       texture.offset.x = (repeatX - 1) / 2 * -1
     }
+    */
   }
 
   get currentSlideIndex() {

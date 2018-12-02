@@ -104,7 +104,10 @@ export default class FluidGallery {
 
       video.src = src
       video.load()
-      // video.play()
+      const play = video.play()
+      if (play) {
+        play.catch((err) => undefined)
+      }
 
       return texture
     } else {

@@ -45,7 +45,6 @@ void main()  {
   gl_FragColor = rgba;
   // gl_FragColor = vec4(tri(progress));
   // gl_FragColor = vec4(delayValue);
-  // gl_FragColor = vec4(delayValue);
   // gl_FragColor = vec4(uv,1.,1.);
 }
 `

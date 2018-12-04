@@ -1,6 +1,3 @@
-// TODO: allow overriding constants
-// TODO: support cleanup?
-
 import * as THREE from 'three'
 import isVideo from 'is-video'
 
@@ -62,7 +59,6 @@ export default class FluidGallery {
     this._plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1, 1, 1), this._material)
 
     this._scene = new THREE.Scene()
-    this._scene.background = new THREE.Color(0x111111)
     this._scene.add(this._plane)
 
     this.resize()
@@ -117,44 +113,9 @@ export default class FluidGallery {
   }
 
   _updateTextureOnResize = (texture) => {
-    // TODO: changing texture wrapS/wrapT and UV matrix only works with textures
-    // that are sizeed power of two
-
-    /*
-    let texWidth
-    let texHeight
-
-    if (texture.image) {
-      texWidth = texture.image.naturalWidth || texture.image.videoWidth
-      texHeight = texture.image.naturalHeight || texture.image.videoHeight
-    }
-
-    // console.log('_updateTextureOnResize', texture, { texWidth, texHeight })
-
-    if (texWidth > 0 && texHeight > 0) {
-      const {
-        width,
-        height
-      } = this._canvas
-
-      texture.wrapS = THREE.ClampToEdgeWrapping
-      texture.wrapT = THREE.ClampToEdgeWrapping
-
-      // const t = rectCover(this._canvas, { width: texWidth, height: texHeight })
-      // console.log(t)
-
-      // texture.offset.set(t[0] / width, t[1] / height)
-      // texture.repeat.set(4, 4)
-
-      // const repeatX = width * texHeight / (height * texWidth)
-      // const repeatY = 1
-      // texture.repeat.set(repeatX, repeatY)
-      // texture.offset.x = (repeatX - 1) / 2 * -1
-
-      texture.needsUpdate = true
-      console.log(texture)
-    }
-    */
+    // TODO: we want to mimic background-size: cover by default. another
+    // workaround is needed, sinced changing texture wrapS/wrapT and UV
+    // matrix only works with textures that are sized power of two
   }
 
   get currentSlideIndex() {
@@ -199,8 +160,6 @@ export default class FluidGallery {
 
     this._material.uniforms.texture1.value = this._textures[currentSlide]
     this._material.uniforms.texture2.value = this._textures[nextSlide]
-
-    // console.log({ currentSlide, nextSlide, position: this._position })
   }
 
   render() {

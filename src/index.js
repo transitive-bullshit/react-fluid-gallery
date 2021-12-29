@@ -11,6 +11,11 @@ import FluidGallery from './fluid-gallery'
 
 const noop = () => undefined
 
+export const changeSlideEnum = {
+  next: 'next',
+  prev: 'prev'
+}
+
 class ReactFluidGallery extends Component {
   static propTypes = {
     slides: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -20,12 +25,14 @@ class ReactFluidGallery extends Component {
     size: PropTypes.shape({
       width: PropTypes.number,
       height: PropTypes.number
-    })
+    }),
+    changeSlide: PropTypes.oneOf(Object.keys(changeSlideEnum))
   }
 
   static defaultProps = {
     onChange: noop,
-    style: { }
+    style: { },
+    changeSlide: undefined,
   }
 
   _current = (typeof this.props.startAt !== 'undefined'
@@ -51,12 +58,24 @@ class ReactFluidGallery extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps) {
+    const { changeSlide } = nextProps
+    if (changeSlide) {
+      const multiplier = changeSlide === changeSlideEnum.prev ? -1 : 1
+      const deltaY = this._canvas.height * 1.5 * multiplier
+      this._gallery.onScroll({ deltaY })
+      return false
+    }
+    return true
+  }
+
   render() {
     const {
       slides,
       startAt,
       onChange,
       style,
+      changeSlide,
       ...rest
     } = this.props
 

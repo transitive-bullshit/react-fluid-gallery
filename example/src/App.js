@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import FluidGallery from 'react-fluid-gallery'
+import FluidGallery, { changeSlideEnum } from 'react-fluid-gallery'
 import GitHubCorner from 'react-github-corner'
 
 import video1 from './assets/0.mp4'
@@ -22,6 +22,22 @@ const images = [
 ]
 
 export default class App extends Component {
+
+  constructor() {
+    super()
+    this.state = {
+      changeSlide: undefined
+    }
+  }
+
+  onClickPrev = () => {
+    this.setState({changeSlide: changeSlideEnum.prev});
+  }
+
+  onClickNext = () => {
+    this.setState({changeSlide: changeSlideEnum.next});
+  }
+  
   render () {
     return (
       <div
@@ -29,10 +45,13 @@ export default class App extends Component {
           height: '100vh'
         }}
       >
+        <button onClick={this.onClickNext}> Click to go to next slide</button>
+        <button onClick={this.onClickPrev}> Click to go to prev slide</button>
         <FluidGallery
           slides={images}
           startAt={0}
           onChange={this._onChange}
+          changeSlide={this.state.changeSlide}
         />
 
         <div

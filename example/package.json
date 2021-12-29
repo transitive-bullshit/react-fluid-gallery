@@ -8,7 +8,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-fluid-gallery": "link:..",
+    "react-fluid-gallery": "file:..",
     "react-github-corner": "^2.3.0",
     "react-scripts": "^1.1.4"
   },

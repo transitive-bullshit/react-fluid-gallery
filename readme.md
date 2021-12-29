@@ -47,6 +47,7 @@ export default class App extends Component {
 | `slides`    | `Array<string>`  | **required** | Array of image / video URLs to use for the gallery slides. |
 | `startAt`   | number           | random   | Default slide to show. |
 | `onChange`  | function(index: number) | undefined   | Optional callback when the active slide is changed. |
+| `changeSlide`  | `changeSlideEnum.next \| changeSlideEnum.prev` | undefined   | Passing down `next` will change the active slide to the next, whereas passing down `prev` will change the active slide to the previous. This is useful if you want to control the slide transition in the consuming application by means other than manually swiping / scrolling. See an example of this in ./example. |
 | `...`       | ...              | undefined | Any other props are applied to the root element. |
 
 ## Credits
